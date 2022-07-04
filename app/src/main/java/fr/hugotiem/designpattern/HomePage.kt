@@ -52,7 +52,7 @@ fun HomePage(navController: NavController) {
             ) {
                 Text(
                     text = "Nouvelle partie",
-                    modifier = Modifier.padding(horizontal = 10.dp)
+                    modifier = Modifier.padding(10.dp)
                 )
             }
 
@@ -65,7 +65,7 @@ fun HomePage(navController: NavController) {
             ) {
                 Text(
                     text = "Continuer",
-                    modifier = Modifier.padding(horizontal = 10.dp)
+                    modifier = Modifier.padding(10.dp)
                 )
             }
         }

@@ -37,9 +37,8 @@ fun DefaultPreview() {
     DesignPatternTheme {
         NavHost(navController = navController, startDestination = "home") {
             composable("home") { HomePage(navController) }
-            i
-            composable("new") { HomePage(navController) }
-            /*...*/
+            composable("continue") { ContinuePage(navController) }
+            composable("report") { ReportPage(navController) }
         }
     }
 }
