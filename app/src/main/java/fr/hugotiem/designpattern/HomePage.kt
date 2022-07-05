@@ -45,7 +45,7 @@ fun HomePage(navController: NavController) {
 
             Surface(
                 modifier = Modifier.clickable {
-
+                    navController.navigate("setup")
                 }.padding(vertical = 10.dp),
                 color = colorResource(id = R.color.grey),
                 shape = RoundedCornerShape(5.dp)
