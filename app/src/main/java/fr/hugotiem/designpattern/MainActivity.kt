@@ -36,6 +36,7 @@ fun DefaultPreview() {
             composable("report") { ReportPage(navController) }
             composable("setup") { SetupPage(navController) }
             composable("team-selection") { TeamSelection(navController) }
+            composable("game") {GamePage(navController)}
         }
     }
 }
