@@ -159,7 +159,8 @@ fun SetupPage(navController: NavController) {
                             vertical = 10.dp,
                             horizontal = 20.dp,
                         )
-                        .defaultMinSize(minWidth = 100.dp),
+                        .defaultMinSize(minWidth = 100.dp)
+                        .clickable { navController.navigate("game") },
                     textAlign = TextAlign.Center
                 )
             }
