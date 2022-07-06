@@ -149,7 +149,9 @@ fun SetupPage(navController: NavController) {
 @Composable
 fun AppAddSurface(navController: NavController, text: String) {
     Box(
-        modifier = Modifier.padding(horizontal = 20.dp)
+        modifier = Modifier.padding(horizontal = 20.dp).clickable {
+            navController.navigate("team-selection")
+        }
     ){
         Box(
             modifier = Modifier.clip(shape = RoundedCornerShape(10.dp)),
