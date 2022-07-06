@@ -12,6 +12,9 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -111,13 +114,31 @@ fun SetupPage(navController: NavController) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Icon(Icons.Filled.KeyboardArrowUp, contentDescription = null)
+                            val time: MutableState<Int> = remember {
+                                mutableStateOf(15)
+                            }
+                            Icon(Icons.Filled.KeyboardArrowUp,
+                                contentDescription = null,
+                                modifier = Modifier.clickable {
+                                    if(time.value < 40) {
+                                        time.value += 5
+                                    }
+                                }
+                            )
                             Text(
-                                text = "15 min",
+                                text = "${time.value} min",
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Bold
                             )
-                            Icon(Icons.Filled.KeyboardArrowDown, contentDescription = null)
+                            Icon(
+                                Icons.Filled.KeyboardArrowDown,
+                                contentDescription = null,
+                                modifier = Modifier.clickable {
+                                    if(time.value > 5) {
+                                        time.value -= 5
+                                    }
+                                }
+                            )
                         }
                     }
                 }
@@ -149,9 +170,11 @@ fun SetupPage(navController: NavController) {
 @Composable
 fun AppAddSurface(navController: NavController, text: String) {
     Box(
-        modifier = Modifier.padding(horizontal = 20.dp).clickable {
-            navController.navigate("team-selection")
-        }
+        modifier = Modifier
+            .padding(horizontal = 20.dp)
+            .clickable {
+                navController.navigate("team-selection")
+            }
     ){
         Box(
             modifier = Modifier.clip(shape = RoundedCornerShape(10.dp)),
@@ -159,12 +182,13 @@ fun AppAddSurface(navController: NavController, text: String) {
             Row(
                 modifier = Modifier
                     .background(color = colorResource(id = R.color.white))
-                    .padding(10.dp).padding(end = 10.dp),
+                    .padding(10.dp)
+                    .padding(end = 10.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(
                     onClick = {
-                        //navController.navigate("")
+                        navController.navigate("team-selection")
                     },
                     Modifier.background(
                         color = colorResource(id = R.color.grey),
