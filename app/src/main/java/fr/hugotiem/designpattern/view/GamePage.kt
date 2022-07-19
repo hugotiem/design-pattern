@@ -2,6 +2,7 @@ package fr.hugotiem.designpattern.view
 
 import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
@@ -10,7 +11,13 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+
 import androidx.compose.runtime.*
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -89,11 +96,15 @@ fun GamePage(navController: NavController, gameViewModel: GameViewModel) {
                 Text(currentUserState!!.name)
             } else {
                 Text(text = "NO PLAYER")
+
+
             }
+
         }
+
+
     }
 }
-
 
 @Composable
 fun SwitchDemo(checkedState: MutableState<Boolean>) {
@@ -127,4 +138,17 @@ fun ButtonPlayer(text: String, color: Color, player: Player) {
             Log.d("mess", "LOSE")
         }*/
     })
+}
+
+
+@Composable
+fun ButtonEnd() {
+    Button(onClick = { /* Do something! */ }, colors = ButtonDefaults.textButtonColors(
+        backgroundColor = Color.Gray
+    ), modifier = Modifier.padding(8.dp),
+        shape = CircleShape
+    ) {
+        Text("Fin de parti",
+            color = Color.White)
+    }
 }
