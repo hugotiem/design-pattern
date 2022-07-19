@@ -1,4 +1,4 @@
-package fr.hugotiem.designpattern
+package fr.hugotiem.designpattern.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,10 +19,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import fr.hugotiem.designpattern.R
+import fr.hugotiem.designpattern.viewmodel.ReportViewModel
 import java.util.*
 
 @Composable
-fun ReportPage(navController: NavController) {
+fun ReportPage(navController: NavController, reportViewModel: ReportViewModel) {
     Scaffold(
         backgroundColor = colorResource(id = R.color.app_purple),
         topBar = {

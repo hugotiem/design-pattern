@@ -1,4 +1,4 @@
-package fr.hugotiem.designpattern
+package fr.hugotiem.designpattern.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,32 +26,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import fr.hugotiem.designpattern.R
+import fr.hugotiem.designpattern.viewmodel.SetupViewModel
 
 @Composable
-fun SetupPage(navController: NavController) {
+fun SetupPage(navController: NavController, setupViewModel: SetupViewModel) {
     Scaffold(
         backgroundColor = colorResource(id = R.color.app_purple),
         topBar = {
-            TopAppBar(
-                backgroundColor = colorResource(id = R.color.app_purple),
-                elevation = 0.dp,
-                title = {
-                    Text(
-                        text = "Nouvelle partie",
-                        color = colorResource(id = R.color.white),
-                        fontSize = 20.sp,
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            Icons.Filled.ArrowBack,
-                            contentDescription = null,
-                            tint = colorResource(id = R.color.white)
-                        )
-                    }
-                }
-            ) 
+            CustomTopAppBar(navController = navController, automaticLeading = true, title = "Nouvelle partie")
         }
     ) {
         Image(

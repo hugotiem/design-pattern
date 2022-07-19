@@ -1,4 +1,15 @@
 package fr.hugotiem.designpattern.model
 
-class Player(val name: String, val image: Int?, val twoPts: Float, val threePts: Float) {
+import androidx.lifecycle.MutableLiveData
+
+
+class Player(val name: String, val pts2: Int, val pts3: Int) {
+
+    companion object {
+        fun createPlayer(): Player {
+            return Player("", 0, 0)
+        }
+    }
+
+
 }

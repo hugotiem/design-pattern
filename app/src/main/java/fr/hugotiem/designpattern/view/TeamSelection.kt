@@ -1,4 +1,4 @@
-package fr.hugotiem.designpattern
+package fr.hugotiem.designpattern.view
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -21,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import fr.hugotiem.designpattern.R
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

@@ -1,4 +1,4 @@
-package fr.hugotiem.designpattern
+package fr.hugotiem.designpattern.view
 
 import android.content.Intent
 import androidx.compose.foundation.*
@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import fr.hugotiem.designpattern.R
 
 @Composable
 fun HomePage(navController: NavController) {

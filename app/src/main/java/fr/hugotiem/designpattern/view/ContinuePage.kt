@@ -1,4 +1,4 @@
-package fr.hugotiem.designpattern.ui.theme
+package fr.hugotiem.designpattern.view
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -23,24 +23,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import fr.hugotiem.designpattern.R
+import fr.hugotiem.designpattern.viewmodel.ContinueViewModel
 
 @Composable
-fun ContinuePage (navController: NavController) {
+fun ContinuePage (navController: NavController, continueViewModel: ContinueViewModel) {
     val list = arrayListOf<String>("item1", "item2", "item3", "item4", "item5")
     Scaffold(
         topBar = {
-            TopAppBar(
-                backgroundColor = colorResource(id = R.color.app_purple),
-                elevation = 0.dp
-            ) {
-                IconButton(onClick = { navController.popBackStack() }) {
-                    Icon(
-                        Icons.Filled.ArrowBack, 
-                        contentDescription = null,
-                        tint = colorResource(id = R.color.white)
-                    )
-                }
-            }
+            CustomTopAppBar(navController = navController, automaticLeading = true)
         },
         backgroundColor = colorResource(id = R.color.app_purple)
     ) {
@@ -49,11 +39,13 @@ fun ContinuePage (navController: NavController) {
         ) {
             items(list) { item ->
                 Column(
-                    modifier = Modifier.padding(
-                        vertical = 10.dp
-                    ).clickable {
-                        navController.navigate("report")
-                    }
+                    modifier = Modifier
+                        .padding(
+                            vertical = 10.dp
+                        )
+                        .clickable {
+                            navController.navigate("report")
+                        }
                 ) {
                     Text(
                         text = "Match - TEAM A vs. TEAM B",
