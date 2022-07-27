@@ -36,7 +36,7 @@ val teams = listOf<Map<String, *>>(
 val games = listOf<Map<String, *>>(
     mapOf(
         "level" to "ROOKIE",
-        "fulltime" to 20
+        "fulltime" to 20,
         "team" to teams[0],
     )
 )
