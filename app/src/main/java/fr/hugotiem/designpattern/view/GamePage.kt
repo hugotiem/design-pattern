@@ -40,6 +40,10 @@ fun GamePage(navController: NavController, gameViewModel: GameViewModel) {
     val scoreTeam1State: Int? by gameViewModel.scoreTeam1LiveData.observeAsState()
     val scoreTeam2State: Int? by gameViewModel.scoreTeam2LiveData.observeAsState()
 
+    val roundState: MutableState<Int> = remember {
+        mutableStateOf(1)
+    }
+
     Scaffold(
         backgroundColor = colorResource(id = R.color.app_purple),
         topBar = {

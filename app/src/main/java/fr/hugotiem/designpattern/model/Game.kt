@@ -34,4 +34,10 @@ class Game {
         this.fulltime = time
 
     }
+
+    companion object {
+        fun fromJson(json: Map<String, *>): Game {
+
+        }
+    }
 }

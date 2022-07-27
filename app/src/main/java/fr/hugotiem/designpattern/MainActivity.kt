@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                     composable("report") { ReportPage(navController, reportViewModel) }
                     composable("setup") { SetupPage(navController, setupViewModel) }
                     composable("team-selection") { TeamSelection(navController) }
-                    composable("game") { GamePage().GamePage(navController, gameViewModel) }
+                    composable("game") { GamePage(navController, gameViewModel) }
                 }
             }
         }

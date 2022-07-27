@@ -13,9 +13,9 @@ class GameViewModel: ViewModel() {
     val game: Game = Game()
 
     val currentPlayerLiveData = MutableLiveData<Player?>()
-    val currentTeamLiveData = MutableLiveData<Team?>()
-    val scoreTeam1LiveData = MutableLiveData<Int>()
-    val scoreTeam2LiveData = MutableLiveData<Int>()
+    val currentTeamLiveData = MutableLiveData<Team>()
+    val scoreTeam1LiveData = MutableLiveData<Int>(0)
+    val scoreTeam2LiveData = MutableLiveData<Int>(0)
 
     var currentPlayer: Player?
         get() = currentPlayerLiveData.value
@@ -29,14 +29,14 @@ class GameViewModel: ViewModel() {
             currentTeamLiveData.postValue(value)
         }
 
-    var scoreTeam1: Int?
-        get() = scoreTeam1LiveData.value
+    var scoreTeam1: Int
+        get() = scoreTeam1LiveData.value!!
         set(value) {
             scoreTeam1LiveData.postValue(value)
         }
 
-    var scoreTeam2: Int?
-        get() = scoreTeam2LiveData.value
+    var scoreTeam2: Int
+        get() = scoreTeam2LiveData.value!!
         set(value) {
             scoreTeam2LiveData.postValue(value)
         }
