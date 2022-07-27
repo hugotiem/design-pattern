@@ -12,6 +12,9 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,11 +26,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import fr.hugotiem.designpattern.R
+import fr.hugotiem.designpattern.model.Game
 import fr.hugotiem.designpattern.viewmodel.ContinueViewModel
 
 @Composable
 fun ContinuePage (navController: NavController, continueViewModel: ContinueViewModel) {
-    val list = arrayListOf<String>("item1", "item2", "item3", "item4", "item5")
+    val list: List<Game>? by continueViewModel.gameListLiveData.observeAsState()
+
+    LaunchedEffect(Unit) {
+        continueViewModel.fetchGames()
+    }
+
     Scaffold(
         topBar = {
             CustomTopAppBar(navController = navController, automaticLeading = true)
@@ -37,7 +46,7 @@ fun ContinuePage (navController: NavController, continueViewModel: ContinueViewM
         LazyColumn(
             modifier = Modifier.padding(horizontal = 20.dp)
         ) {
-            items(list) { item ->
+            items(list ?: listOf()) { item ->
                 Column(
                     modifier = Modifier
                         .padding(
@@ -87,7 +96,7 @@ fun ContinuePage (navController: NavController, continueViewModel: ContinueViewM
                                 .fillMaxWidth()
                         ) {
                             Text(
-                                text = item,
+                                text = item.team1?.name ?: "no team",
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier.padding(
                                     top = 20.dp,
@@ -108,7 +117,7 @@ fun ContinuePage (navController: NavController, continueViewModel: ContinueViewM
                                     )
                                 )
                                 Text(
-                                    text = item,
+                                    text = item.team2?.name ?: "no team",
                                     fontWeight = FontWeight.Bold,
                                     modifier = Modifier.padding(
                                         bottom = 20.dp,

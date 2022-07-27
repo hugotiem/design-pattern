@@ -1,5 +1,7 @@
 package fr.hugotiem.designpattern.model
 
+import android.util.Log
+
 class Team(val name: String, val players: List<Player>) {
 
     companion object {

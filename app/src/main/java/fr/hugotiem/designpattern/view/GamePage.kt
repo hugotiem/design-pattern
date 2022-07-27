@@ -30,6 +30,7 @@ import kotlin.random.Random
 import androidx.compose.runtime.livedata.observeAsState
 import fr.hugotiem.designpattern.model.Team
 import fr.hugotiem.designpattern.viewmodel.GameViewModel
+import fr.hugotiem.designpattern.viewmodel.games
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -44,6 +45,10 @@ fun GamePage(navController: NavController, gameViewModel: GameViewModel) {
         mutableStateOf(1)
     }
 
+    LaunchedEffect(Unit) {
+        gameViewModel.fetchGame()
+    }
+
     Scaffold(
         backgroundColor = colorResource(id = R.color.app_purple),
         topBar = {
@@ -56,10 +61,16 @@ fun GamePage(navController: NavController, gameViewModel: GameViewModel) {
 
         Column() {
             val checkedState = remember { mutableStateOf(true) }
+            if(checkedState.value) {
+                gameViewModel.currentTeamLiveData.postValue(gameViewModel.game.value?.team1)
+                Log.d("GAME", "current team ${gameViewModel.currentTeamLiveData.value}")
+            } else {
+                gameViewModel.currentTeamLiveData.postValue(gameViewModel.game.value?.team2)
+            }
             Row(modifier = Modifier.padding(8.dp)) {
-                gameViewModel.game.team1?.name?.let { it1 -> Text(text = it1) }
+                gameViewModel.game.value?.team1?.name?.let { it1 -> Text(text = it1) }
                 SwitchDemo(checkedState)
-                gameViewModel.game.team2?.name?.let { it1 -> Text(text = it1) }
+                gameViewModel.game.value?.team2?.name?.let { it1 -> Text(text = it1) }
 
             }
             Row() {
@@ -74,7 +85,10 @@ fun GamePage(navController: NavController, gameViewModel: GameViewModel) {
                     ButtonPlayer(
                         text = player.name,
                         color = colorResource(id = R.color.grey),
-                        player = player
+                        player = player,
+                        onClick = {
+                            gameViewModel.currentPlayerLiveData.postValue(player)
+                        }
                     )
                 }
             })
@@ -132,9 +146,9 @@ fun ButtonPts(text: String, color: Color, onClick: () -> Unit) {
 }
 
 @Composable
-fun ButtonPlayer(text: String, color: Color, player: Player) {
+fun ButtonPlayer(text: String, color: Color, player: Player, onClick: () -> Unit) {
     ButtonPts(text = text, color = color, onClick = {
-        // CurrentPlayer.currentPlayer = player
+       onClick()
         /*val generated = Random.nextInt(0, 100)
         if(generated <= pourcent) {
             Log.d("mess", "WIN")

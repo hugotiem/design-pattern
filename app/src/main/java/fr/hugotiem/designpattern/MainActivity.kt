@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import fr.hugotiem.designpattern.model.Game
 import fr.hugotiem.designpattern.ui.theme.DesignPatternTheme
 import fr.hugotiem.designpattern.view.*
 import fr.hugotiem.designpattern.viewmodel.ContinueViewModel
@@ -38,8 +39,11 @@ class MainActivity : ComponentActivity() {
                     composable("continue") { ContinuePage(navController, continueViewModel) }
                     composable("report") { ReportPage(navController, reportViewModel) }
                     composable("setup") { SetupPage(navController, setupViewModel) }
-                    composable("team-selection") { TeamSelection(navController) }
-                    composable("game") { GamePage(navController, gameViewModel) }
+                    //composable("team-selection") { TeamSelection(navController) }
+
+                    composable("game") {
+                        GamePage(navController, gameViewModel)
+                    }
                 }
             }
         }

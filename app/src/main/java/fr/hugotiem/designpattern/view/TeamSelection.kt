@@ -22,10 +22,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import fr.hugotiem.designpattern.R
+import fr.hugotiem.designpattern.viewmodel.SetupViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun TeamSelection(navController: NavController) {
+fun TeamSelection(navController: NavController, onClick: () -> Unit, onReturn: () -> Unit) {
     val selected: MutableState<Int> = remember {
         mutableStateOf(0)
     }
@@ -36,7 +37,7 @@ fun TeamSelection(navController: NavController) {
                 backgroundColor = colorResource(id = R.color.app_purple),
                 title = {},
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { onReturn() }) {
                         Icon(
                             Icons.Filled.ArrowBack,
                             contentDescription = null,
@@ -84,6 +85,8 @@ fun TeamSelection(navController: NavController) {
                     Box(
                         modifier =  modifier.clickable {
                             selected.value = list.indexOf(item)
+                            onClick()
+
                         }
                     ) {
                         Image(
@@ -98,7 +101,7 @@ fun TeamSelection(navController: NavController) {
             Surface(
                 modifier = Modifier
                     .clickable {
-                        navController.popBackStack()
+                        onReturn()
                     }
                     .padding(vertical = 20.dp),
                 color = colorResource(id = R.color.grey),

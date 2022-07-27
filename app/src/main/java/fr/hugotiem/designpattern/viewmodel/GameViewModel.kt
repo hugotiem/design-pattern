@@ -10,12 +10,17 @@ import kotlin.random.Random
 
 class GameViewModel: ViewModel() {
 
-    val game: Game = Game.initGame()
+    var game = MutableLiveData<Game>()
 
     val currentPlayerLiveData = MutableLiveData<Player?>()
-    val currentTeamLiveData = MutableLiveData<Team>()
+    val currentTeamLiveData = MutableLiveData<Team>(game.value?.team1)
     val scoreTeam1LiveData = MutableLiveData<Int>(0)
     val scoreTeam2LiveData = MutableLiveData<Int>(0)
+
+    fun fetchGame() {
+        val _game = Game.fromJson(games[0])
+        game.postValue(_game)
+    }
 
     var currentPlayer: Player?
         get() = currentPlayerLiveData.value
@@ -46,8 +51,10 @@ class GameViewModel: ViewModel() {
             val probability = Random.nextInt(0, 100)
             val userStat = getStat(pts)
             if(probability <= userStat) {
-                if(currentTeam == game.team1) {
-
+                if(currentTeam == game.value?.team1) {
+                    scoreTeam1LiveData.postValue(scoreTeam1LiveData.value?.plus(getPoint(pts)))
+                } else {
+                    scoreTeam2LiveData.postValue(scoreTeam2LiveData.value?.plus(getPoint(pts)))
                 }
             } else {
                 // NO PTS
@@ -59,5 +66,10 @@ class GameViewModel: ViewModel() {
     fun getStat(pts: Int): Int {
         if(pts == 2) return currentPlayer!!.pts2
         return currentPlayer!!.pts3
+    }
+
+    fun getPoint(pts: Int): Int {
+        if(pts == 2) return 2
+        return 3
     }
 }
