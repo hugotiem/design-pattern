@@ -10,7 +10,7 @@ import kotlin.random.Random
 
 class GameViewModel: ViewModel() {
 
-    val game: Game = Game()
+    val game: Game = Game.initGame()
 
     val currentPlayerLiveData = MutableLiveData<Player?>()
     val currentTeamLiveData = MutableLiveData<Team>()
