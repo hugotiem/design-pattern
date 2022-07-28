@@ -46,7 +46,7 @@ class GameViewModel: ViewModel() {
             scoreTeam2LiveData.postValue(value)
         }
 
-    fun addPts(pts: Int) {
+    fun addPts(pts: Int): Boolean? {
         if(currentPlayer != null) {
             val probability = Random.nextInt(0, 100)
             val userStat = getStat(pts)
@@ -56,11 +56,14 @@ class GameViewModel: ViewModel() {
                 } else {
                     scoreTeam2LiveData.postValue(scoreTeam2LiveData.value?.plus(getPoint(pts)))
                 }
+                return true
             } else {
                 // NO PTS
                 Log.d("$pts pts", "${currentPlayer!!.name} LOSE")
+                return false
             }
         }
+        return null
     }
 
     fun getStat(pts: Int): Int {
